@@ -1,0 +1,26 @@
+{
+  "name": "demo-express-ts2",
+  "version": "1.0.0",
+  "description": "api restful project",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "nodemon scr/server.ts",
+    "dev": "ts-node src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "author": "Cantin Bartel",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.3",
+    "nodemon": "^2.0.21",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  }
+}
