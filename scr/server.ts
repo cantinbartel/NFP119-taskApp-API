@@ -11,7 +11,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
 
-const port = 3000
+const port = Number(process.env.PORT!) | 8080
 
 app.listen(port, async () => {
     await dbConnect();
