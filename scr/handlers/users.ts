@@ -17,8 +17,9 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
     try {
         const user = await User.findById(id);
         if (!user) res.status(404).send({ error: { code: 404, message: 'User not found' }});
-        const tasks = await Task.find({user: id})
-        res.json({ user, tasks })
+        // const tasks = await Task.find({user: id})
+        // res.json({ user, tasks })
+        res.json(user)
     } catch (error) {
         res.status(500).send(`Error: ${error}`);
     }

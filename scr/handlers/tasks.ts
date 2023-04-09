@@ -33,6 +33,19 @@ export const getTaskById = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
+export const getTaskByUserId = async (req: Request, res: Response): Promise<void> => {
+    const { userId } = req.params;
+    try {
+        const tasks = await Task.find({ user: userId });
+        tasks ? res.json(tasks) : res.status(404).send({ error: {
+            code: 404,
+            message: 'Tasks not found'
+        }});
+    } catch (error) {
+        res.status(500).send(`Error: ${error}`);
+    }
+};
+
 export const updateTask = async (req: Request, res: Response): Promise<void> => {
     try {
         const updatedTask: ITask | null = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true }).exec();
