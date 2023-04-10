@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { User, IUser } from '../models/User';
-import { Task, ITask } from '../models/Task';
+import { User } from '../models/User';
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
     const user = new User(req.body);
@@ -8,7 +7,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
         await user.save();
         res.json(user);
     } catch (error) {
-        res.status(500).send(`Error: ${error}`)
+        res.status(500).send(`Error: ${error}`);
     }
 };
 
@@ -17,9 +16,7 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
     try {
         const user = await User.findById(id);
         if (!user) res.status(404).send({ error: { code: 404, message: 'User not found' }});
-        // const tasks = await Task.find({user: id})
-        // res.json({ user, tasks })
-        res.json(user)
+        res.json(user);
     } catch (error) {
         res.status(500).send(`Error: ${error}`);
     }

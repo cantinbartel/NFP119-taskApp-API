@@ -1,15 +1,16 @@
 import { Schema, Model, model } from 'mongoose';
 
-interface IUser {
+type IUser = {
     name: string;
     email: string;
-}
+};
 
-interface ITask {
-    title: string;
-    description: string;
+type ITask = {
+    title: string
+    description: string
+    completed: boolean
     user: IUser
-}
+};
 
 const TaskSchema = new Schema<ITask>({
     title: {
@@ -20,6 +21,10 @@ const TaskSchema = new Schema<ITask>({
     description: {
         type: String
     },
+    completed: {
+        type: Boolean,
+        default: false
+    },
     user: {
         type: Schema.Types.ObjectId,
         required: true,
@@ -29,4 +34,4 @@ const TaskSchema = new Schema<ITask>({
 
 const Task: Model<ITask> = model('Task', TaskSchema);
 
-export { Task, ITask }
+export { Task, ITask };

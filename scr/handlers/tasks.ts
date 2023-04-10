@@ -7,7 +7,7 @@ export const addTask = async (req: Request, res: Response): Promise<void> => {
         await task.save();
         res.json(task);
     } catch (error) {
-        res.status(500).send(`Error: ${error}`)
+        res.status(500).send(`Error: ${error}`);
     }
 };
 
@@ -64,6 +64,6 @@ export const deleteTask = async (req: Request, res: Response): Promise<void> => 
         res.status(200).json({message: 'Task deleted', deleteTask});
     } catch(error) {
         console.error(error);
-        res.status(500).send(`Error: ${error}`)
+        res.status(500).send(`Error: ${error}`);
     }
 }
