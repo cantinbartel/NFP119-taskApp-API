@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Task, ITask } from '../models/Task';
 
+/* POST - ADD TASK */
 export const addTask = async (req: Request, res: Response): Promise<void> => {
     const task = new Task(req.body);
     try {
@@ -11,6 +12,7 @@ export const addTask = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+/* GET ALL TASKS */
 export const getAllTasks = async (req: Request, res: Response): Promise<void> => {
     try {
         const tasks = await Task.find().populate('user', 'name email');
@@ -20,6 +22,7 @@ export const getAllTasks = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
+/* GET TASK BY ID */
 export const getTaskById = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     try {
@@ -33,6 +36,7 @@ export const getTaskById = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
+/* GET TASKS REALATED TO A USER */
 export const getTaskByUserId = async (req: Request, res: Response): Promise<void> => {
     const { userId } = req.params;
     try {
@@ -46,6 +50,7 @@ export const getTaskByUserId = async (req: Request, res: Response): Promise<void
     }
 };
 
+/* PUT - UPDATE TASK */
 export const updateTask = async (req: Request, res: Response): Promise<void> => {
     try {
         const updatedTask: ITask | null = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true }).exec();
@@ -57,6 +62,7 @@ export const updateTask = async (req: Request, res: Response): Promise<void> => 
     }
 }
 
+/* DELETE TASK */
 export const deleteTask = async (req: Request, res: Response): Promise<void> => {
     try {
         const deletedTask = await Task.findByIdAndDelete(req.params.id).exec();

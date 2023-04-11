@@ -1,5 +1,6 @@
 import { connect } from 'mongoose';
 
+/* DATABASE CONNECTION */
 const dbConnect = async ():Promise<void> => {
     const uri: string = process.env.MONGO_URI!;
     try {

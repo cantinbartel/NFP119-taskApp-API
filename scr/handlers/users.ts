@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { User } from '../models/User';
 
+/* POST - ADD USER */
 export const addUser = async (req: Request, res: Response): Promise<void> => {
     const user = new User(req.body);
     try {
@@ -11,6 +12,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+/* GET USER BY ID */
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     try {
@@ -22,6 +24,7 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
+/* GET ALL USERS */
 export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
     try {
         const users = await User.find();

@@ -1,7 +1,7 @@
 {
-  "name": "demo-express-ts2",
+  "name": "taskapp-api",
   "version": "1.0.0",
-  "description": "api restful project",
+  "description": "NFP119 REST API",
   "main": "src/server.ts",
   "scripts": {
     "start": "nodemon scr/server.ts",
