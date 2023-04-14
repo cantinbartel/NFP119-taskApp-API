@@ -8,4 +8,5 @@ router.post('/', tasks_1.addTask);
 router.get('/:id', tasks_1.getTaskById);
 router.put('/:id', tasks_1.updateTask);
 router.delete('/:id', tasks_1.deleteTask);
+router.get('/:userId/user', tasks_1.getTaskByUserId);
 exports.default = router;

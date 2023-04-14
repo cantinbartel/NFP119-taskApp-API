@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTask = exports.updateTask = exports.getTaskById = exports.getAllTasks = exports.addTask = void 0;
+exports.deleteTask = exports.updateTask = exports.getTaskByUserId = exports.getTaskById = exports.getAllTasks = exports.addTask = void 0;
 const Task_1 = require("../models/Task");
+/* POST - ADD TASK */
 const addTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const task = new Task_1.Task(req.body);
     try {
@@ -22,6 +23,7 @@ const addTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.addTask = addTask;
+/* GET ALL TASKS */
 const getAllTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const tasks = yield Task_1.Task.find().populate('user', 'name email');
@@ -32,6 +34,7 @@ const getAllTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllTasks = getAllTasks;
+/* GET TASK BY ID */
 const getTaskById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
@@ -46,6 +49,22 @@ const getTaskById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getTaskById = getTaskById;
+/* GET TASKS REALATED TO A USER */
+const getTaskByUserId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    try {
+        const tasks = yield Task_1.Task.find({ user: userId });
+        tasks ? res.json(tasks) : res.status(404).send({ error: {
+                code: 404,
+                message: 'Tasks not found'
+            } });
+    }
+    catch (error) {
+        res.status(500).send(`Error: ${error}`);
+    }
+});
+exports.getTaskByUserId = getTaskByUserId;
+/* PUT - UPDATE TASK */
 const updateTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const updatedTask = yield Task_1.Task.findByIdAndUpdate(req.params.id, req.body, { new: true }).exec();
@@ -59,6 +78,7 @@ const updateTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.updateTask = updateTask;
+/* DELETE TASK */
 const deleteTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const deletedTask = yield Task_1.Task.findByIdAndDelete(req.params.id).exec();

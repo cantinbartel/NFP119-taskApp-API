@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllUsers = exports.getUserById = exports.addUser = void 0;
 const User_1 = require("../models/User");
+/* POST - ADD USER */
 const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = new User_1.User(req.body);
     try {
@@ -22,20 +23,21 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.addUser = addUser;
+/* GET USER BY ID */
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         const user = yield User_1.User.findById(id);
-        user ? res.json(user) : res.status(404).send({ error: {
-                code: 404,
-                message: 'User not found'
-            } });
+        if (!user)
+            res.status(404).send({ error: { code: 404, message: 'User not found' } });
+        res.json(user);
     }
     catch (error) {
         res.status(500).send(`Error: ${error}`);
     }
 });
 exports.getUserById = getUserById;
+/* GET ALL USERS */
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield User_1.User.find();

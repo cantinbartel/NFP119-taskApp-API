@@ -10,10 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+/* DATABASE CONNECTION */
 const dbConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     const uri = process.env.MONGO_URI;
     try {
-        const cnx = yield (0, mongoose_1.connect)(uri);
+        yield (0, mongoose_1.connect)(uri);
         console.log('Mongo Connected');
     }
     catch (error) {
