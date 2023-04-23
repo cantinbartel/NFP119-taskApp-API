@@ -5,6 +5,9 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "nodemon scr/server.ts",
+    "develop": "docker-compose up --build",
+    "develop -d": "docker-compose up --build -d",
+    "stop": "docker-compose down",
     "dev": "ts-node src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
